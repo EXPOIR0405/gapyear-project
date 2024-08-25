@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공지사항 - Wavve Toon</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white">
+
+    <!-- 헤더 -->
+    <header class="text-center py-6">
+        <h1 class="text-4xl font-bold text-blue-400">WAVVE TOON</h1>
+        <nav class="mt-4">
+            <ul class="flex justify-center space-x-6">
+                <li><a href="index.html" class="hover:text-blue-400">웹툰</a></li>
+                <li><a href="index.html" class="hover:text-blue-400">최근본웹툰</a></li>
+                <li><a href="index.html" class="hover:text-blue-400">북마크</a></li>
+                <li><a href="notice.html" class="hover:text-blue-400">공지사항</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 공지사항 게시판 -->
+    <section class="mt-10 mx-4 bg-gray-800 p-4 rounded-lg">
+        <table class="min-w-full text-left text-white">
+            <thead>
+                <tr>
+                    <th class="px-4 py-2">제목</th>
+                    <th class="px-4 py-2">이름</th>
+                    <th class="px-4 py-2">날짜</th>
+                    <th class="px-4 py-2">조회</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="border-t border-gray-600">
+                    <td class="px-4 py-2"><a href="#" class="text-green-400 hover:underline">웨이브툰 최신본웹툰 북마크 기능 사용 안내</a></td>
+                    <td class="px-4 py-2">웨이브툰</td>
+                    <td class="px-4 py-2">08.20</td>
+                    <td class="px-4 py-2">270</td>
+                </tr>
+                <tr class="border-t border-gray-600">
+                    <td class="px-4 py-2"><a href="#" class="text-green-400 hover:underline">웨이브툰 업데이트 내역 안내 (ver 08.23)</a></td>
+                    <td class="px-4 py-2">웨이브툰</td>
+                    <td class="px-4 py-2">08.20</td>
+                    <td class="px-4 py-2">304</td>
+                </tr>
+                <tr class="border-t border-gray-600">
+                    <td class="px-4 py-2"><a href="#" class="text-green-400 hover:underline">웨이브툰 후원 접속 가이드&평생도메인 안내</a></td>
+                    <td class="px-4 py-2">웨이브툰</td>
+                    <td class="px-4 py-2">08.10</td>
+                    <td class="px-4 py-2">628</td>
+                </tr>
+                <tr class="border-t border-gray-600">
+                    <td class="px-4 py-2"><a href="#" class="text-green-400 hover:underline">웨이브툰 오픈 안내</a></td>
+                    <td class="px-4 py-2">웨이브툰</td>
+                    <td class="px-4 py-2">08.10</td>
+                    <td class="px-4 py-2">578</td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- 페이지 네비게이션 -->
+        <div class="flex justify-center mt-4">
+            <button class="bg-gray-700 text-white px-3 py-1 mx-1 rounded-lg">&laquo;</button>
+            <button class="bg-gray-700 text-white px-3 py-1 mx-1 rounded-lg">1</button>
+            <button class="bg-gray-700 text-white px-3 py-1 mx-1 rounded-lg">&raquo;</button>
+        </div>
+    </section>
+
+</body>
+</html>

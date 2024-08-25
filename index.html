@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wavve Toon</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* 지진 효과를 위한 CSS */
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(3px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(1px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+
+        .shake {
+            animation: shake 0.5s;
+            animation-iteration-count: 4; /* 4번 반복 */
+        }
+
+        /* 손이 멈춰있는 애니메이션 */
+        @keyframes hand-stop {
+            0% { transform: translateY(100px); opacity: 0; }
+            50% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        .hand-stop {
+            animation: hand-stop 1s ease-in-out forwards;
+        }
+
+        /* 눈물 방울 애니메이션 */
+        @keyframes tear-drop {
+            0% { opacity: 0; transform: translateY(-50px); }
+            50% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(50px); }
+        }
+
+        .tear-drop {
+            animation: tear-drop 2s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+
+    <!-- 헤더 -->
+    <header class="text-center py-6">
+        <h1 class="text-4xl font-bold text-blue-400">
+            <a href="index.html" class="hover:text-blue-400">WAVVE TOON</a>
+        </h1>
+        <nav class="mt-4">
+            <ul class="flex justify-center space-x-6">
+                <li><a href="index.html" class="hover:text-blue-400 page-link">웹툰</a></li>
+                <li><a href="#" class="hover:text-blue-400 page-link recent-webtoon">최근본웹툰</a></li>
+                <li><a href="#" class="hover:text-blue-400 page-link">북마크</a></li>
+                <!-- 공지사항 클릭 시 notice.html 페이지로 이동 -->
+                <li><a href="notice.html" class="hover:text-blue-400">공지사항</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 검색 로그인창  -->
+    <div class="flex justify-center items-center mt-6 space-x-4">
+        <div class="relative">
+            <input type="text" placeholder="제목 및 작가" class="p-2 rounded-lg text-black pl-10">
+            <!-- 검색 아이콘 -->
+            <a href="warning.html" class="absolute inset-y-0 left-0 pl-3 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M12.9 14.32a8 8 0 111.414-1.414l4.487 4.486a1 1 0 01-1.414 1.414l-4.487-4.486zM8 14a6 6 0 100-12 6 6 0 000 12z" clip-rule="evenodd" />
+                </svg>
+            </a>
+        </div>
+        <button class="bg-blue-500 text-white px-4 py-2 rounded-lg login-button">로그인</button>
+        <button class="bg-gray-700 text-white px-4 py-2 rounded-lg signup-button">회원가입</button>
+    </div>
+
+    <!-- 광고 섹션 -->
+    <section class="grid grid-cols-3 gap-4 mt-10 mx-4">
+        <div class="rounded-lg cursor-pointer" onclick="showAdWarning()">
+            <img src="images/add.png" alt="Ad 1" class="w-full">
+        </div>
+        <div class="rounded-lg cursor-pointer" onclick="showAdWarning()">
+            <img src="images/add1.png" alt="Ad 2" class="w-full">
+        </div>
+        <!-- 추가 광고들 -->
+        <div class="rounded-lg cursor-pointer" onclick="showAdWarning()">
+            <img src="images/add2.png" alt="Ad 2" class="w-full">
+        </div>
+    </section>
+
+    <!-- 광고 경고 모달 -->
+    <div id="adWarningModal" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+            <h2 class="text-2xl font-bold text-red-600">경고</h2>
+            <p class="mt-4 text-gray-800">당신의 무료가 불법 도박사이트에겐 생명입니다. 조심하세요!</p>
+            <button onclick="closeAdWarning()" class="mt-6 bg-red-600 text-white px-4 py-2 rounded-lg">닫기</button>
+        </div>
+    </div>
+
+    <!-- 로그인/회원가입 실패 모달 -->
+    <div id="failModal" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-6 rounded-lg shadow-lg text-center text-gray-800">
+            <img src="images/police.png" alt="경찰청 마스코트" class="mx-auto mb-4">
+            <h2 class="text-2xl font-bold text-red-600 mb-4">로그인/회원가입 실패</h2>
+            <p>불법 웹툰 사이트에서 로그인 및 회원가입을 시도하셨군요. ^^</p>
+            <p>축하드립니다! 🎉 당신의 IP 주소가 이제 '특별 게스트'로 초대되었습니다.</p>
+            <p class="underline">당신의 IP 주소는 사이버경찰청 수사대에 전달될 수 있고</p>
+            <p class="underline">이와 함께 불법 웹툰 사이트 운영자에게도 전달됩니다.</p>
+            <p class="text-red-500">위치 정보와 해킹 공격의 위험이 함께할 수 있습니다.</p>
+            <p>앞으로는 정식 사이트를 이용하여 보다 안전하게 웹을 탐험하시길 권장합니다.</p>
+            <button onclick="alert('당신의 IP가 저장되었습니다.'); location.reload();" class="mt-4 bg-red-600 text-white px-4 py-2 rounded-lg">확인</button>
+        </div>
+    </div>
+
+    <!-- 시스템 에러 모달 -->
+    <div id="errorModal" class="fixed inset-0 bg-blue-900 text-white flex flex-col items-center justify-center z-50 hidden">
+        <h1 class="text-4xl font-bold mb-4 text-red-500">시스템 오류 발생!</h1>
+        <p class="text-3xl">웹툰 작가님이 과부하로 쓰러졌습니다...</p>
+        <p class="text-3xl mt-4">하지만 걱정 마세요! 잠시 후 다시 일어날 겁니다. <br> 
+        당신이 <span class="text-3xl font-bold text-yellow-500">정식 웹툰 사이트</span>에서 보신다면 말이죠.</p>
+        <div class="mt-6">
+            <button onclick="closeErrorModal()" class="bg-red-600 text-white px-4 py-2 rounded-lg">다시 시도</button>
+        </div>
+    </div>
+
+
+    <!-- 블랙아웃 경고 모달 -->
+    <div id="blackoutModal" class="fixed inset-0 bg-black text-white flex flex-col items-center justify-center z-50 hidden">
+        <h1 class="text-3xl text-center text-red-500 font-bold mb-4">⚠️ 경고: 불법 웹툰 사이트 이용! ⚠️</h1>
+        <p class="text-lg text-center">지금 아끼시는 500원이 나중에 500만원의 법적 분쟁으로 이어질 수 있습니다! 💸<br>
+        웹툰 작가님들의 권리를 무시하지 마시고,<br>
+        앞으로는 정식 사이트에서 안전하게 이용해 주세요. 법적 문제는 피하는 것이 최선입니다! 😅</p>
+        <div class="mt-6">
+            <button onclick="closeBlackoutModal()" class="bg-red-600 text-white px-4 py-2 rounded-lg">알겠습니다.</button>
+        </div>
+    </div>
+
+
+    <!-- 경고 모달 -->
+    <div id="warningModal" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+            <h2 id="warningTitle" class="text-2xl font-bold text-red-600">경고</h2>
+            <p id="warningText" class="mt-4 text-gray-800">경고 내용</p>
+            <div id="handAnimation" class="hand-stop hidden mt-6 text-6xl">✋</div>
+            <div id="tearAnimation" class="tear-drop hidden mt-6 text-6xl">💧</div>
+            <button onclick="closeWarningModal()" class="mt-6 bg-red-600 text-white px-4 py-2 rounded-lg">닫기</button>
+        </div>
+    </div>
+
+    <!-- 공지사항 섹션 -->
+    <section class="mt-10 mx-4">
+        <h2 class="text-2xl font-bold">공지사항</h2>
+        <ul class="mt-4 space-y-2">
+            <li class="bg-gray-800 p-4 rounded-lg flex justify-between items-center">
+                <span>웨이브툰 최신본웹툰 북마크 기능 사용 안내</span>
+                <button class="bg-blue-500 text-white px-4 py-2 rounded-lg toggle-warning">바로가기</button>
+            </li>
+            <div class="hidden text-red-500 mt-2">지금 보고 있는 건 불법 웹툰 사이트입니다.</div>
+
+            <li class="bg-gray-800 p-4 rounded-lg flex justify-between items-center">
+                <span>웨이브툰 업데이트 내역 안내 (ver 08.23)</span>
+                <button class="bg-blue-500 text-white px-4 py-2 rounded-lg toggle-warning">바로가기</button>
+            </li>
+            <div class="hidden text-red-500 mt-2">지금 보고 있는 건 불법 웹툰 사이트입니다.</div>
+        </ul>
+    </section>
+
+    <!-- 상단 메뉴 섹션 -->
+    <section class="bg-gray-800 p-4 mt-10"> <!-- 여기에 mt-10을 추가하여 상단 메뉴와 공지사항 사이에 여백을 둡니다 -->
+        <div class="flex justify-around text-center text-lg">
+            <button class="text-white py-2 px-4 bg-blue-500 rounded-lg">연재</button>
+            <button class="text-white py-2 px-4 blackout-trigger">완결</button>
+        </div>
+        <div class="flex justify-around text-center mt-4">
+            <button class="text-white py-2 px-4 bg-red-500 rounded-lg shake-trigger">최신</button>
+            <button class="text-white shake-trigger">월</button>
+            <button class="text-white shake-trigger">화</button>
+            <button class="text-white shake-trigger">수</button>
+            <button class="text-white shake-trigger">목</button>
+            <button class="text-white shake-trigger">금</button>
+            <button class="text-white shake-trigger">토</button>
+            <button class="text-white shake-trigger">일</button>
+            <button class="text-white shake-trigger">열흘</button>
+        </div>
+    </section>
+
+    <!-- 카테고리 및 필터 섹션 -->
+    <section class="bg-gray-800 p-4 mt-4">
+        <div class="flex justify-center space-x-2 overflow-x-auto">
+            <button class="bg-red-700 text-white py-1 px-2 rounded-lg">전체</button>
+            <button class="bg-gray-700 text-white py-1 px-2 rounded-lg">학원</button>
+            <button class="bg-gray-700 text-white py-1 px-2 rounded-lg">액션</button>
+            <button class="bg-gray-700 text-white py-1 px-2 rounded-lg">SF</button>
+            <button class="bg-gray-700 text-white py-1 px-2 rounded-lg">스토리</button>
+            <!-- 추가 카테고리 버튼들 -->
+        </div>
+        <div class="flex justify-center space-x-2 mt-2 overflow-x-auto">
+            <button class="bg-gray-700 text-white py-1 px-2 rounded-lg">BL/백합</button>
+            <button class="bg-gray-700 text-white py-1 px-2 rounded-lg">개그/코미디</button>
+            <button class="bg-gray-700 text-white py-1 px-2 rounded-lg">연애/순정</button>
+            <button class="bg-gray-700 text-white py-1 px-2 rounded-lg">드라마</button>
+            <button class="bg-gray-700 text-white py-1 px-2 rounded-lg">로맨스</button>
+            <!-- 추가 카테고리 버튼들 -->
+        </div>
+    </section>
+
+    <!-- 웹툰 리스트 섹션 -->
+    <section class="grid grid-cols-4 gap-4 p-4 mt-4 bg-gray-900">
+        <div class="bg-gray-800 p-2 rounded-lg">
+            <!-- 링크 추가 -->
+            <img src="images/comic1.png" alt="피부의 온도" class="rounded-lg trigger-warning cursor-pointer">
+            <div class="mt-2">
+                <p class="text-sm text-gray-400">UP | 1h</p>
+                <h3 class="text-white font-bold">피부의 온도</h3>
+                <p class="text-sm text-blue-400">BL/백합</p>
+            </div>
+        </div>
+        
+        <div class="bg-gray-800 p-2 rounded-lg">
+            <img src="images/comic2.png" alt="드라이버스 하이" class="rounded-lg trigger-warning cursor-pointer">
+            <div class="mt-2">
+                <p class="text-sm text-gray-400">UP | 1h</p>
+                <h3 class="text-white font-bold">드라이버스 하이</h3>
+                <p class="text-sm text-blue-400">BL/백합</p>
+            </div>
+        </div>
+
+        <div class="bg-gray-800 p-2 rounded-lg">
+            <img src="images/comic3.png" alt="기린화" class="rounded-lg trigger-warning cursor-pointer">
+            <div class="mt-2">
+                <p class="text-sm text-gray-400">UP | 13h</p>
+                <h3 class="text-white font-bold">기린화</h3>
+                <p class="text-sm text-blue-400">로맨스</p>
+            </div>
+        </div>
+
+        <div class="bg-gray-800 p-2 rounded-lg"> 
+            <img src="images/comic4.png" alt="킬러가 사랑에 빠졌을 때" class="rounded-lg trigger-warning cursor-pointer">
+            <div class="mt-2">
+                <p class="text-sm text-gray-400">UP | 1h</p>
+                <h3 class="text-white font-bold">킬러가 사랑에 빠졌을 때</h3>
+                <p class="text-sm text-blue-400">BL/백합</p>
+            </div>
+        </div>
+
+        <div class="bg-gray-800 p-2 rounded-lg"> 
+            <img src="images/comic5.png" alt="야구단 신입이 너무 잘함" class="rounded-lg trigger-warning cursor-pointer">
+            <div class="mt-2">
+                <p class="text-sm text-gray-400">UP | 5h</p>
+                <h3 class="text-white font-bold">야구단 신입이 너무 잘함</h3>
+                <p class="text-sm text-blue-400">스포츠</p>
+            </div>
+        </div>
+
+        <div class="bg-gray-800 p-2 rounded-lg"> 
+            <img src="images/comic6.png" alt="염원하소서" class="rounded-lg trigger-warning cursor-pointer">
+            <div class="mt-2">
+                <p class="text-sm text-gray-400">UP | 13h</p>
+                <h3 class="text-white font-bold">염원하소서</h3>
+                <p class="text-sm text-blue-400">BL/백합</p>
+            </div>
+        </div>
+
+        <div class="bg-gray-800 p-2 rounded-lg"> 
+            <img src="images/comic7.png" alt="개나리가 떨어진 길" class="rounded-lg trigger-warning cursor-pointer">
+            <div class="mt-2">
+                <p class="text-sm text-gray-400">UP | 13h</p>
+                <h3 class="text-white font-bold">개나리가 떨어진 길</h3>
+                <p class="text-sm text-blue-400">BL/백합</p>
+            </div>
+        </div>
+    
+        <div class="bg-gray-800 p-2 rounded-lg"> 
+            <img src="images/comic8.png" alt="멸망한 세계의 취사병" class="rounded-lg trigger-warning cursor-pointer">
+            <div class="mt-2">
+                <p class="text-sm text-gray-400">UP | 13h</p>
+                <h3 class="text-white font-bold">멸망한 세계의 취사병</h3>
+                <p class="text-sm text-blue-400">판타지</p>
+            </div>
+        </div>
+
+        <div class="bg-gray-800 p-2 rounded-lg"> 
+            <img src="images/comic9.png" alt="나만 최강 초월자" class="rounded-lg trigger-warning cursor-pointer">
+            <div class="mt-2">
+                <p class="text-sm text-gray-400">UP | 15h</p>
+                <h3 class="text-white font-bold">나만 최강 초월자</h3>
+                <p class="text-sm text-blue-400">소년</p>
+            </div>
+        </div>
+
+        <div class="bg-gray-800 p-2 rounded-lg"> 
+            <img src="images/comic10.png" alt="아수라" class="rounded-lg trigger-warning cursor-pointer">
+            <div class="mt-2">
+                <p class="text-sm text-gray-400">UP | 17h</p>
+                <h3 class="text-white font-bold">아수라</h3>
+                <p class="text-sm text-blue-400">판타지</p>
+            </div>
+        </div>
+
+        <div class="bg-gray-800 p-2 rounded-lg"> 
+            <img src="images/comic11.png" alt="신이 되겠다" class="rounded-lg trigger-warning cursor-pointer">
+            <div class="mt-2">
+                <p class="text-sm text-gray-400">UP | 17h</p>
+                <h3 class="text-white font-bold">신이 되겠다</h3>
+                <p class="text-sm text-blue-400">액션</p>
+            </div>
+        </div>
+
+        <div class="bg-gray-800 p-2 rounded-lg"> 
+            <img src="images/comic12.png" alt="영광의 해일로" class="rounded-lg trigger-warning cursor-pointer">
+            <div class="mt-2">
+                <p class="text-sm text-gray-400">UP | 19h</p>
+                <h3 class="text-white font-bold">영광의 해일로</h3>
+                <p class="text-sm text-blue-400">판타지</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 푸터 섹션 -->
+    <footer class="bg-gray-800 p-6 mt-10 text-center text-gray-400">
+        <h1 class="text-2xl font-bold text-blue-400">WAVVE TOON</h1>
+        <p class="mt-4">
+            웨이브툰(WAVVE TOON) - 무료웹툰, 최신웹툰, 웹툰미리보기로 가장 빠르게 감상하기 © All rights reserved.
+        </p>
+    </footer>
+
+    <!-- 스크립트 섹션 -->
+    <script>
+        // 광고 경고 모달
+        function showAdWarning() {
+            const adModal = document.getElementById('adWarningModal');
+            adModal.classList.remove('hidden');
+            setTimeout(() => {
+                alert("불법 광고는 사용자에게 큰 위험을 초래할 수 있습니다. 주의하세요!");
+            }, 2000);
+        }
+
+        function closeAdWarning() {
+            document.getElementById('adWarningModal').classList.add('hidden');
+        }
+
+        // 로그인 및 회원가입 클릭 시 경고 메시지
+        document.querySelectorAll('.login-button, .signup-button').forEach(button => {
+            button.addEventListener('click', function(event) {
+                event.preventDefault();
+                document.getElementById('failModal').classList.remove('hidden');
+            });
+        });
+
+        // 공지사항 토글 경고 메시지
+        document.querySelectorAll('.toggle-warning').forEach(button => {
+            button.addEventListener('click', function() {
+                const warningMessage = this.parentElement.nextElementSibling;
+                warningMessage.classList.toggle('hidden');
+            });
+        });
+
+        // 페이크 시스템 에러 모달
+        function showErrorModal() {
+            document.getElementById('errorModal').classList.remove('hidden');
+            setTimeout(() => {
+                alert("시스템이 복구되었습니다.");
+                closeErrorModal();
+            }, 3000);
+        }
+
+        function closeErrorModal() {
+            document.getElementById('errorModal').classList.add('hidden');
+        }
+
+        // 블랙아웃 모달
+        function showBlackoutModal() {
+            document.getElementById('blackoutModal').classList.remove('hidden');
+            setTimeout(() => {
+                closeBlackoutModal();
+                alert("변호사 상담비가 꽤 비싼 건 아시죠?");
+            }, 3000); // 3초 후 경고 모달 닫기
+        }
+
+        function closeBlackoutModal() {
+            document.getElementById('blackoutModal').classList.add('hidden');
+        }
+
+        // 지진 효과
+        function startShake() {
+            const body = document.body;
+            body.classList.add('shake');
+            setTimeout(() => {
+                body.classList.remove('shake');
+                alert("지진은 깜짝 이벤트였지만, 웹툰 작가들의 생활고는 상시 이벤트입니다. 오늘도 클릭 한 번, 작가 한 명 살려주세요!");
+            }, 2000);
+        }
+
+        // 특정 버튼 클릭 시 효과 실행
+        document.querySelector('.recent-webtoon').addEventListener('click', showErrorModal);
+        document.querySelector('.blackout-trigger').addEventListener('click', showBlackoutModal);
+        document.querySelectorAll('.shake-trigger').forEach(button => {
+            button.addEventListener('click', startShake);
+        });
+
+        // 랜덤 경고 메시지
+        function showRandomWarning() {
+            const warnings = [
+                { title: "경고", text: "당신의 클릭 하나로, 수많은 웹툰 작가들의 꿈이 무너지고 있습니다.", animation: "hand-stop" },
+                { title: "경고", text: "이 웹툰을 보며 웃고 있는 당신 뒤에서, 웹툰 작가들은 눈물을 흘리고 있습니다.", animation: "tear-drop" },
+                { title: "경고", text: "당신의 무심한 클릭이 누군가의 꿈을 앗아가고 있습니다.", animation: "" },
+                { title: "경고", text: "불법 웹툰은 작가의 열정을 빼앗아 갑니다. 당신의 선택은 어떤가요?", animation: "" }
+            ];
+
+            const randomIndex = Math.floor(Math.random() * warnings.length);
+            const selectedWarning = warnings[randomIndex];
+
+            document.getElementById('warningTitle').innerText = selectedWarning.title;
+            document.getElementById('warningText').innerText = selectedWarning.text;
+            document.getElementById('handAnimation').classList.add('hidden');
+            document.getElementById('tearAnimation').classList.add('hidden');
+
+            if (selectedWarning.animation === "hand-stop") {
+                document.getElementById('handAnimation').classList.remove('hidden');
+            } else if (selectedWarning.animation === "tear-drop") {
+                document.getElementById('tearAnimation').classList.remove('hidden');
+            }
+
+            document.getElementById('warningModal').classList.remove('hidden');
+        }
+
+        function closeWarningModal() {
+            document.getElementById('warningModal').classList.add('hidden');
+        }
+
+        // 웹툰 이미지 클릭 시 랜덤 경고 표시
+        document.querySelectorAll('.trigger-warning').forEach(image => {
+            image.addEventListener('click', showRandomWarning);
+        });
+    </script>
+
+</body>
+</html>
