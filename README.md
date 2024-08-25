@@ -2,7 +2,7 @@
 
 이 프로젝트는 불법 웹툰 유통사이트를 모방하여 만든 크론사이트입니다. 이 사이트는 불법 콘텐츠 유통의 위험성과 더불어 해킹의 위험성에 대해 경각심을 심어주기 위한 교육적 목적으로 제작되었습니다.
 
-프로젝트 사이트
+프로젝트 사이트 : https://gapyear2.vercel.app/
 
 📋 프로젝트 개요
 
@@ -21,18 +21,18 @@
 
  📂 프로젝트 구조
 
-.
-├── images/                 # 이미지 파일들
-├── index.html              # 메인 페이지
-├── notice.html             # 경고 페이지
-├── warning.html            # 해킹 경고 페이지
-├── README.md               # 이 파일
+images/                 # 웹툰 이미지 파일들
+index.html              # 메인 페이지
+notice.html             # 경고 페이지
+warning.html            # 해킹 경고 페이지
+README.md               # 이 파일
+LICENSE			# 라이선스 파일
 
 🔍 사용법
 
 1. 프로젝트 클론
 
-git clone https://github.com/yourusername/yourproject.git
+		git clone https://github.com/yourusername/yourproject.git
 
 2. 로컬 환경에서 실행
 
