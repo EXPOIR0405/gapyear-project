@@ -47,31 +47,33 @@
         .tear-drop {
             animation: tear-drop 2s ease-in-out infinite;
         }
-        @keyframes glitchText {
-        0% { transform: translate(0); }
-        20% { transform: translate(-5px, 5px); }
-        40% { transform: translate(-5px, -5px); }
-        60% { transform: translate(5px, 5px); }
-        80% { transform: translate(5px, -5px); }
-        100% { transform: translate(0); }
-    }
 
-    .glitch-effect {
-        animation: glitchText 0.3s linear infinite;
-    }
+        @keyframes glitchText {
+            0% { transform: translate(0); }
+            20% { transform: translate(-5px, 5px); }
+            40% { transform: translate(-5px, -5px); }
+            60% { transform: translate(5px, 5px); }
+            80% { transform: translate(5px, -5px); }
+            100% { transform: translate(0); }
+        }
+
+        .glitch-effect {
+            animation: glitchText 0.3s linear infinite;
+        }
     </style>
-</head>
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RE8JBLZ13M"></script>
     <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-    gtag('config', 'G-RE8JBLZ13M');
+        gtag('config', 'G-RE8JBLZ13M');
     </script>
-    <body class="bg-gray-900 text-white">
+</head>
 
+<body class="bg-gray-900 text-white">
     <!-- 헤더 -->
     <header class="text-center py-6">
         <h1 class="text-4xl font-bold text-blue-400">
