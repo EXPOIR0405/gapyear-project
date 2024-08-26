@@ -251,7 +251,7 @@
             </div>
         </div>
 
-        <div class="bg-gray-800 p-2 rounded-lgtrigger-warning cursor-pointer"> 
+        <div class="bg-gray-800 p-2 rounded-lg trigger-warning cursor-pointer"> 
             <img src="images/comic5.png" alt="야구단 신입이 너무 잘함" class="rounded-lg">
             <div class="mt-2">
                 <p class="text-sm text-gray-400">UP | 5h</p>
@@ -377,7 +377,7 @@
             document.getElementById('blackoutModal').classList.remove('hidden');
             setTimeout(() => {
                 closeBlackoutModal();
-                alert("변호사 상담비가 꽤 비싼 건 아시죠?");
+                alert("변호사 수임비가 꽤 비싼 건 아시죠?");
             }, 3000); // 3초 후 경고 모달 닫기
         }
 
@@ -408,7 +408,14 @@
                 { title: "경고", text: "당신의 클릭 하나로, 수많은 웹툰 작가들의 꿈이 무너지고 있습니다.", animation: "hand-stop" },
                 { title: "경고", text: "이 웹툰을 보며 웃고 있는 당신 뒤에서, 웹툰 작가들은 눈물을 흘리고 있습니다.", animation: "tear-drop" },
                 { title: "경고", text: "당신의 무심한 클릭이 누군가의 꿈을 앗아가고 있습니다.", animation: "" },
-                { title: "경고", text: "불법 웹툰은 작가의 열정을 빼앗아 갑니다. 당신의 선택은 어떤가요?", animation: "" }
+                { title: "경고", text: "불법 웹툰은 작가의 열정을 빼앗아 갑니다. 당신의 선택은 어떤가요?", animation: "" },
+                { title: "🚨추적 중🚨", text: "이 웹툰을 불법으로 보는 당신, 뒤에서 경찰이 당신을 지켜보고 있을지도 몰라요. 불법은 항상 들킨다는 걸 잊지 마세요!", animation: "police-car" },
+                { title: "초능력 발견!", text: "당신의 손가락이 불법 웹툰 페이지를 열 때마다 어딘가에서 웹툰 작가의 펜이 멈춥니다. 마법이 아니라 현실입니다.", animation: "magic-wand" },
+                { title: "마치 영화처럼", text: "불법 웹툰 사이트에서의 하루는 마치 ‘모험의 시작’ 같지만, 결말은 ‘죄와 벌’로 끝날 수 있습니다. 🎬", emoji: "🎬" },
+                { title: "😈 사탄도 울고 갈 당신 😈", text: "사탄도 울고 갈 만큼 무서운 선택을 하고 있네요. 지금이라도 돌아가 불법 웹툰 대신 정당한 방법으로 작가를 지원하세요!", animation: "devil-cry"},
+                { title: "범죄자의 길", text: "불법 웹툰을 클릭할 때마다 범죄자가 되어가는 당신, 진짜 히어로는 법을 지키는 사람입니다!"},
+                { title: "카르마의 법칙", text: "지금 당신이 불법 웹툰을 클릭한 그 순간, 카르마는 당신을 노트에 적고 있습니다. 공식 채널로 돌아가세요, 카르마는 지켜보고 있어요."},
+                { title: "당신의 꿈은 21세기 해적?", text: "해적이 되고 싶나요? 영화에서나 멋져 보일 뿐, 당신은 조니뎁이 아니랍니다."}
             ];
 
             const randomIndex = Math.floor(Math.random() * warnings.length);
@@ -419,6 +426,7 @@
             document.getElementById('handAnimation').classList.add('hidden');
             document.getElementById('tearAnimation').classList.add('hidden');
 
+
             if (selectedWarning.animation === "hand-stop") {
                 document.getElementById('handAnimation').classList.remove('hidden');
             } else if (selectedWarning.animation === "tear-drop") {
@@ -427,6 +435,7 @@
 
             document.getElementById('warningModal').classList.remove('hidden');
         }
+
 
         function closeWarningModal() {
             document.getElementById('warningModal').classList.add('hidden');
