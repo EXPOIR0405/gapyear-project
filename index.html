@@ -60,6 +60,48 @@
         .glitch-effect {
             animation: glitchText 0.3s linear infinite;
         }
+ /* 강화된 글리치 효과를 위한 새로운 스타일 */
+ .glitch-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 9999;
+    display: none;
+    pointer-events: none;
+}
+
+        .glitch-text {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 36px;
+            color: #ff0000;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            z-index: 10000;
+            display: none;
+        }
+
+        @keyframes glitch-anim-1 {
+            0% { clip-path: inset(80% 0 0 0); }
+            20% { clip-path: inset(20% 0 60% 0); }
+            40% { clip-path: inset(60% 0 20% 0); }
+            60% { clip-path: inset(40% 0 40% 0); }
+            80% { clip-path: inset(0 0 80% 0); }
+            100% { clip-path: inset(80% 0 0 0); }
+        }
+
+        @keyframes glitch-anim-2 {
+            0% { transform: translate(0); }
+            20% { transform: translate(-5px, 5px); }
+            40% { transform: translate(-5px, -5px); }
+            60% { transform: translate(5px, 5px); }
+            80% { transform: translate(5px, -5px); }
+            100% { transform: translate(0); }
+        }
     </style>
 
     <!-- Google tag (gtag.js) -->
@@ -154,6 +196,11 @@
         </div>
     </div>
 
+    <!-- 강화된 글리치 효과를 위한 새로운 요소 -->
+    <div class="glitch-container">
+        <div class="glitch-content"></div>
+    </div>
+    <div class="glitch-text">Warning: Hacking Detected</div>
 
 
     <!-- 블랙아웃 경고 모달 -->
@@ -557,7 +604,60 @@
         document.querySelectorAll('.trigger-warning').forEach(image => {
             image.addEventListener('click', showRandomWarning);
         });
-    </script>
+// 강화된 글리치 효과를 위한 새로운 스크립트
+function startEnhancedGlitchEffect() {
+    const glitchContainer = document.querySelector('.glitch-container');
+    const glitchContent = document.querySelector('.glitch-content');
+    const glitchText = document.querySelector('.glitch-text');
+    
+    // 현재 보이는 영역만 캡처
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
 
+    html2canvas(document.body, {
+        width: viewportWidth,
+        height: viewportHeight,
+        windowWidth: viewportWidth,
+        windowHeight: viewportHeight,
+        scrollX: window.scrollX,
+        scrollY: window.scrollY
+    }).then(canvas => {
+        glitchContent.innerHTML = '';
+        glitchContent.appendChild(canvas);
+        
+        glitchContainer.style.display = 'block';
+        glitchText.style.display = 'block';
+
+        // 글리치 애니메이션 적용
+        glitchContent.style.animation = 'glitch-anim-1 0.3s infinite';
+        glitchText.style.animation = 'glitch-anim-2 0.3s infinite';
+
+        // 랜덤 글리치 효과
+        let glitchInterval = setInterval(() => {
+            glitchContent.style.left = `${Math.random() * 20 - 10}px`;
+            glitchContent.style.top = `${Math.random() * 20 - 10}px`;
+            glitchText.style.left = `calc(50% + ${Math.random() * 40 - 20}px)`;
+            glitchText.style.top = `calc(50% + ${Math.random() * 40 - 20}px)`;
+            glitchContent.style.filter = `hue-rotate(${Math.random() * 360}deg) saturate(${Math.random() * 10})`;
+        }, 50);
+
+        // 효과 제거
+        setTimeout(() => {
+            clearInterval(glitchInterval);
+            glitchContainer.style.display = 'none';
+            glitchText.style.display = 'none';
+            glitchContent.style.animation = '';
+            glitchText.style.animation = '';
+        }, 5000); // 5초로 연장
+    });
+}
+
+    // 장르 버튼에 강화된 글리치 효과 이벤트 리스너 추가
+    document.querySelectorAll('.bg-gray-700.text-white.py-1.px-2.rounded-lg').forEach(button => {
+        button.addEventListener('click', startEnhancedGlitchEffect);
+    });
+    </script>
+    <!-- html2canvas 라이브러리 추가 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </body>
 </html>
