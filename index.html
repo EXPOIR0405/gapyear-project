@@ -123,13 +123,14 @@
     <!-- 시스템 에러 모달 -->
     <div id="errorModal" class="fixed inset-0 bg-blue-900 text-white flex flex-col items-center justify-center z-50 hidden">
         <h1 class="text-4xl font-bold mb-4 text-red-500">시스템 오류 발생!</h1>
-        <p class="text-3xl">웹툰 작가님이 과부하로 쓰러졌습니다...</p>
-        <p class="text-3xl mt-4">하지만 걱정 마세요! 잠시 후 다시 일어날 겁니다. <br> 
+        <p class="text-3xl text-center ">웹툰 작가님이 과부하로 쓰러졌습니다...</p>
+        <p class="text-3xl text-center mt-4">하지만 걱정 마세요! 잠시 후 다시 일어날 겁니다. <br> 
         당신이 <span class="text-3xl font-bold text-yellow-500">정식 웹툰 사이트</span>에서 보신다면 말이죠.</p>
         <div class="mt-6">
-            <button onclick="closeErrorModal()" class="bg-red-600 text-white px-4 py-2 rounded-lg">다시 시도</button>
+            <button onclick="redirectToHome()" class="bg-red-600 text-white px-4 py-2 rounded-lg">작가님의 손목 지켜주기</button>
         </div>
     </div>
+
 
 
     <!-- 블랙아웃 경고 모달 -->
@@ -214,9 +215,8 @@
 
     <!-- 웹툰 리스트 섹션 -->
     <section class="grid grid-cols-4 gap-4 p-4 mt-4 bg-gray-900">
-        <div class="bg-gray-800 p-2 rounded-lg">
-            <!-- 링크 추가 -->
-            <img src="images/comic1.png" alt="피부의 온도" class="rounded-lg trigger-warning cursor-pointer">
+        <div class="bg-gray-800 p-2 rounded-lg trigger-warning cursor-pointer">
+            <img src="images/comic1.png" alt="피부의 온도" class="rounded-lg">
             <div class="mt-2">
                 <p class="text-sm text-gray-400">UP | 1h</p>
                 <h3 class="text-white font-bold">피부의 온도</h3>
@@ -224,8 +224,8 @@
             </div>
         </div>
         
-        <div class="bg-gray-800 p-2 rounded-lg">
-            <img src="images/comic2.png" alt="드라이버스 하이" class="rounded-lg trigger-warning cursor-pointer">
+        <div class="bg-gray-800 p-2 rounded-lg trigger-warning cursor-pointer">
+            <img src="images/comic2.png" alt="드라이버스 하이" class="rounded-lg">
             <div class="mt-2">
                 <p class="text-sm text-gray-400">UP | 1h</p>
                 <h3 class="text-white font-bold">드라이버스 하이</h3>
@@ -233,8 +233,8 @@
             </div>
         </div>
 
-        <div class="bg-gray-800 p-2 rounded-lg">
-            <img src="images/comic3.png" alt="기린화" class="rounded-lg trigger-warning cursor-pointer">
+        <div class="bg-gray-800 p-2 rounded-lg trigger-warning cursor-pointer">
+            <img src="images/comic3.png" alt="기린화" class="rounded-lg">
             <div class="mt-2">
                 <p class="text-sm text-gray-400">UP | 13h</p>
                 <h3 class="text-white font-bold">기린화</h3>
@@ -242,8 +242,8 @@
             </div>
         </div>
 
-        <div class="bg-gray-800 p-2 rounded-lg"> 
-            <img src="images/comic4.png" alt="킬러가 사랑에 빠졌을 때" class="rounded-lg trigger-warning cursor-pointer">
+        <div class="bg-gray-800 p-2 rounded-lg trigger-warning cursor-pointer"> 
+            <img src="images/comic4.png" alt="킬러가 사랑에 빠졌을 때" class="rounded-lg">
             <div class="mt-2">
                 <p class="text-sm text-gray-400">UP | 1h</p>
                 <h3 class="text-white font-bold">킬러가 사랑에 빠졌을 때</h3>
@@ -251,8 +251,8 @@
             </div>
         </div>
 
-        <div class="bg-gray-800 p-2 rounded-lg"> 
-            <img src="images/comic5.png" alt="야구단 신입이 너무 잘함" class="rounded-lg trigger-warning cursor-pointer">
+        <div class="bg-gray-800 p-2 rounded-lgtrigger-warning cursor-pointer"> 
+            <img src="images/comic5.png" alt="야구단 신입이 너무 잘함" class="rounded-lg">
             <div class="mt-2">
                 <p class="text-sm text-gray-400">UP | 5h</p>
                 <h3 class="text-white font-bold">야구단 신입이 너무 잘함</h3>
@@ -260,8 +260,8 @@
             </div>
         </div>
 
-        <div class="bg-gray-800 p-2 rounded-lg"> 
-            <img src="images/comic6.png" alt="염원하소서" class="rounded-lg trigger-warning cursor-pointer">
+        <div class="bg-gray-800 p-2 rounded-lg trigger-warning cursor-pointer"> 
+            <img src="images/comic6.png" alt="염원하소서" class="rounded-lg">
             <div class="mt-2">
                 <p class="text-sm text-gray-400">UP | 13h</p>
                 <h3 class="text-white font-bold">염원하소서</h3>
@@ -269,8 +269,8 @@
             </div>
         </div>
 
-        <div class="bg-gray-800 p-2 rounded-lg"> 
-            <img src="images/comic7.png" alt="개나리가 떨어진 길" class="rounded-lg trigger-warning cursor-pointer">
+        <div class="bg-gray-800 p-2 rounded-lg trigger-warning cursor-pointer"> 
+            <img src="images/comic7.png" alt="개나리가 떨어진 길" class="rounded-lg">
             <div class="mt-2">
                 <p class="text-sm text-gray-400">UP | 13h</p>
                 <h3 class="text-white font-bold">개나리가 떨어진 길</h3>
@@ -278,8 +278,8 @@
             </div>
         </div>
     
-        <div class="bg-gray-800 p-2 rounded-lg"> 
-            <img src="images/comic8.png" alt="멸망한 세계의 취사병" class="rounded-lg trigger-warning cursor-pointer">
+        <div class="bg-gray-800 p-2 rounded-lg trigger-warning cursor-pointer"> 
+            <img src="images/comic8.png" alt="멸망한 세계의 취사병" class="rounded-lg">
             <div class="mt-2">
                 <p class="text-sm text-gray-400">UP | 13h</p>
                 <h3 class="text-white font-bold">멸망한 세계의 취사병</h3>
@@ -287,8 +287,8 @@
             </div>
         </div>
 
-        <div class="bg-gray-800 p-2 rounded-lg"> 
-            <img src="images/comic9.png" alt="나만 최강 초월자" class="rounded-lg trigger-warning cursor-pointer">
+        <div class="bg-gray-800 p-2 rounded-lg trigger-warning cursor-pointer"> 
+            <img src="images/comic9.png" alt="나만 최강 초월자" class="rounded-lg">
             <div class="mt-2">
                 <p class="text-sm text-gray-400">UP | 15h</p>
                 <h3 class="text-white font-bold">나만 최강 초월자</h3>
@@ -296,8 +296,8 @@
             </div>
         </div>
 
-        <div class="bg-gray-800 p-2 rounded-lg"> 
-            <img src="images/comic10.png" alt="아수라" class="rounded-lg trigger-warning cursor-pointer">
+        <div class="bg-gray-800 p-2 rounded-lg trigger-warning cursor-pointer"> 
+            <img src="images/comic10.png" alt="아수라" class="rounded-lg">
             <div class="mt-2">
                 <p class="text-sm text-gray-400">UP | 17h</p>
                 <h3 class="text-white font-bold">아수라</h3>
@@ -305,8 +305,8 @@
             </div>
         </div>
 
-        <div class="bg-gray-800 p-2 rounded-lg"> 
-            <img src="images/comic11.png" alt="신이 되겠다" class="rounded-lg trigger-warning cursor-pointer">
+        <div class="bg-gray-800 p-2 rounded-lg trigger-warning cursor-pointer"> 
+            <img src="images/comic11.png" alt="신이 되겠다" class="rounded-lg">
             <div class="mt-2">
                 <p class="text-sm text-gray-400">UP | 17h</p>
                 <h3 class="text-white font-bold">신이 되겠다</h3>
@@ -314,8 +314,8 @@
             </div>
         </div>
 
-        <div class="bg-gray-800 p-2 rounded-lg"> 
-            <img src="images/comic12.png" alt="영광의 해일로" class="rounded-lg trigger-warning cursor-pointer">
+        <div class="bg-gray-800 p-2 rounded-lg trigger-warning cursor-pointer"> 
+            <img src="images/comic12.png" alt="영광의 해일로" class="rounded-lg">
             <div class="mt-2">
                 <p class="text-sm text-gray-400">UP | 19h</p>
                 <h3 class="text-white font-bold">영광의 해일로</h3>
@@ -363,17 +363,13 @@
             });
         });
 
-        // 페이크 시스템 에러 모달
+        // 시스템 에러 모달
         function showErrorModal() {
             document.getElementById('errorModal').classList.remove('hidden');
-            setTimeout(() => {
-                alert("시스템이 복구되었습니다.");
-                closeErrorModal();
-            }, 3000);
         }
 
-        function closeErrorModal() {
-            document.getElementById('errorModal').classList.add('hidden');
+        function redirectToHome() {
+            window.location.href = 'index.html';
         }
 
         // 블랙아웃 모달
