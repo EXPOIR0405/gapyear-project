@@ -32,7 +32,7 @@ LICENSE			# 라이선스 파일
 
 1. 프로젝트 클론
 
-		git clone https://github.com/yourusername/yourproject.git
+		(https://github.com/EXPOIR0405/gapyear-project.git)
 
 2. 로컬 환경에서 실행
 
