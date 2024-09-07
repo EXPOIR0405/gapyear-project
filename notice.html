@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>공지사항 - Wavve Toon</title>
+    <title>웹소설 최신 웹소설 무료보기</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body class="bg-gray-900 text-white">
 
@@ -16,47 +17,113 @@
                 <li><a href="index.html" class="hover:text-blue-400">웹툰</a></li>
                 <li><a href="index.html" class="hover:text-blue-400">최근본웹툰</a></li>
                 <li><a href="index.html" class="hover:text-blue-400">북마크</a></li>
-                <li><a href="notice.html" class="hover:text-blue-400">공지사항</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- 공지사항 게시판 -->
+    <!-- 웹소설 게시판 -->
     <section class="mt-10 mx-4 bg-gray-800 p-4 rounded-lg">
         <table class="min-w-full text-left text-white">
             <thead>
                 <tr>
-                    <th class="px-4 py-2">제목</th>
-                    <th class="px-4 py-2">이름</th>
-                    <th class="px-4 py-2">날짜</th>
-                    <th class="px-4 py-2">조회</th>
+                    <th class="px-4 py-2">소설명</th>
+                    <th class="px-4 py-2">작가명</th>
+                    <th class="px-4 py-2">다운수</th>
+                    <th class="px-4 py-2">다운로드</th>
                 </tr>
             </thead>
             <tbody>
                 <tr class="border-t border-gray-600">
-                    <td class="px-4 py-2"><a href="#" class="text-green-400 hover:underline">웨이브툰 최신본웹툰 북마크 기능 사용 안내</a></td>
-                    <td class="px-4 py-2">웨이브툰</td>
-                    <td class="px-4 py-2">08.20</td>
-                    <td class="px-4 py-2">270</td>
+                    <td class="px-4 py-2"><span class="text-yellow-400">화산귀환</span></td>
+                    <td class="px-4 py-2">비가</td>
+                    <td class="px-4 py-2">3894</td>
+                    <td class="px-4 py-2">
+                        <a href="#" onclick="downloadWarningTxt()">
+                            <i class="fas fa-download text-green-400 hover:text-green-600"></i>
+                        </a>
+                    </td>
                 </tr>
                 <tr class="border-t border-gray-600">
-                    <td class="px-4 py-2"><a href="#" class="text-green-400 hover:underline">웨이브툰 업데이트 내역 안내 (ver 08.23)</a></td>
-                    <td class="px-4 py-2">웨이브툰</td>
-                    <td class="px-4 py-2">08.20</td>
-                    <td class="px-4 py-2">304</td>
+                    <td class="px-4 py-2"><span class="text-yellow-400">프레야 영애를 조심하세요</span></td>
+                    <td class="px-4 py-2">비엔나커피</td>
+                    <td class="px-4 py-2">1502</td>
+                    <td class="px-4 py-2">
+                        <a href="#" onclick="downloadWarningTxt()">
+                            <i class="fas fa-download text-green-400 hover:text-green-600"></i>
+                        </a>
+                    </td>
                 </tr>
                 <tr class="border-t border-gray-600">
-                    <td class="px-4 py-2"><a href="#" class="text-green-400 hover:underline">웨이브툰 후원 접속 가이드&평생도메인 안내</a></td>
-                    <td class="px-4 py-2">웨이브툰</td>
-                    <td class="px-4 py-2">08.10</td>
-                    <td class="px-4 py-2">628</td>
+                    <td class="px-4 py-2"><span class="text-yellow-400">전남편을 위한 악역이 되었더니</span></td>
+                    <td class="px-4 py-2">홍당근</td>
+                    <td class="px-4 py-2">1140</td>
+                    <td class="px-4 py-2">
+                        <a href="#" onclick="downloadWarningTxt()">
+                            <i class="fas fa-download text-green-400 hover:text-green-600"></i>
+                        </a>
+                    </td>
                 </tr>
                 <tr class="border-t border-gray-600">
-                    <td class="px-4 py-2"><a href="#" class="text-green-400 hover:underline">웨이브툰 오픈 안내</a></td>
-                    <td class="px-4 py-2">웨이브툰</td>
-                    <td class="px-4 py-2">08.10</td>
-                    <td class="px-4 py-2">578</td>
+                    <td class="px-4 py-2"><span class="text-yellow-400">공작 부인은 죽지 않았다</span></td>
+                    <td class="px-4 py-2">하얀호박</td>
+                    <td class="px-4 py-2">1029</td>
+                    <td class="px-4 py-2">
+                        <a href="#" onclick="downloadWarningTxt()">
+                            <i class="fas fa-download text-green-400 hover:text-green-600"></i>
+                        </a>
+                    </td>
                 </tr>
+                <tr class="border-t border-gray-600">
+                    <td class="px-4 py-2"><span class="text-yellow-400">전남편을 위한 악역이 되었더니</span></td>
+                    <td class="px-4 py-2">홍당근</td>
+                    <td class="px-4 py-2">1140</td>
+                    <td class="px-4 py-2">
+                        <a href="#" onclick="downloadWarningTxt()">
+                            <i class="fas fa-download text-green-400 hover:text-green-600"></i>
+                        </a>
+                    </td>
+                </tr>
+                <tr class="border-t border-gray-600">
+                    <td class="px-4 py-2"><span class="text-yellow-400">하남자의 탑 공략법</span></td>
+                    <td class="px-4 py-2">꾸찌꾸찌</td>
+                    <td class="px-4 py-2">1002</td>
+                    <td class="px-4 py-2">
+                        <a href="#" onclick="downloadWarningTxt()">
+                            <i class="fas fa-download text-green-400 hover:text-green-600"></i>
+                        </a>
+                    </td>
+                </tr>
+                <tr class="border-t border-gray-600">
+                    <td class="px-4 py-2"><span class="text-yellow-400">보이스피싱인데 인생역전</span></td>
+                    <td class="px-4 py-2">장탄</td>
+                    <td class="px-4 py-2">2049</td>
+                    <td class="px-4 py-2">
+                        <a href="#" onclick="downloadWarningTxt()">
+                            <i class="fas fa-download text-green-400 hover:text-green-600"></i>
+                        </a>
+                    </td>
+                </tr>
+                <tr class="border-t border-gray-600">
+                    <td class="px-4 py-2"><span class="text-yellow-400">젖어버린 계약</span></td>
+                    <td class="px-4 py-2">비단리</td>
+                    <td class="px-4 py-2">602</td>
+                    <td class="px-4 py-2">
+                        <a href="#" onclick="downloadWarningTxt()">
+                            <i class="fas fa-download text-green-400 hover:text-green-600"></i>
+                        </a>
+                    </td>
+                </tr>
+                <tr class="border-t border-gray-600">
+                    <td class="px-4 py-2"><span class="text-yellow-400">불쑥 다가와</span></td>
+                    <td class="px-4 py-2">이소서</td>
+                    <td class="px-4 py-2">839</td>
+                    <td class="px-4 py-2">
+                        <a href="#" onclick="downloadWarningTxt()">
+                            <i class="fas fa-download text-green-400 hover:text-green-600"></i>
+                        </a>
+                    </td>
+                </tr>
+                <!-- More rows can go here -->
             </tbody>
         </table>
         <!-- 페이지 네비게이션 -->
@@ -66,6 +133,54 @@
             <button class="bg-gray-700 text-white px-3 py-1 mx-1 rounded-lg">&raquo;</button>
         </div>
     </section>
+
+    <!-- Warning & Download Script -->
+    <script>
+        function generateRandomFileName() {
+            let characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+            let fileName = '';
+            for (let i = 0; i < 8; i++) {  // 8자리 랜덤 문자열 생성
+                fileName += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            return fileName + '.txt';  // 확장자는 txt로 설정
+        }
+        
+        function downloadWarningTxt() {
+            let warning = confirm("이 소설을 다운로드하시겠습니까?");
+            if (warning) {
+                // Create a Blob object with the warning text
+                const content = `우와, 축하합니다! 당신은 "불법 웹소설 다운로드"의 세계에 첫 발을 내디뎠습니다. 🎉
+                
+저희는 이미 당신의 IP 주소, 브라우징 히스토리, 심지어 오늘 아침에 뭘 먹었는지까지도 파악했습니다. (참고로, 그 토스트는 좀 더 구워야 했어요.)
+
+하지만 걱정 마세요, 우리도 사람이니까요. 아무한테도 말 안 할게요. 그 대신...
+
+1. 오늘 밤 12시 전에 이 파일을 삭제하세요.
+2. 만약 삭제하지 않으면... 내일 아침 당신의 알람이 갑자기 디즈니 주제곡으로 바뀔 수도 있습니다. 🎶
+3. 혹시나 이 경고를 무시한다면, 당신의 컴퓨터에서 무작위로 "빅뱅 이론" 에피소드가 재생될 거예요. 끊임없이. (이건 감당 못 하실 겁니다.)
+
+알겠죠? 삭제는 선택이 아니라 필수입니다. 😎
+
+P.S. 우리는 진짜 해커라기보다는 그냥 장난꾸러기들입니다. 하지만, 당신의 컴퓨터는 우리가 지켜보고 있다는 사실을 잊지 마세요... 농담입니다, 걱정 마세요. 😆`;
+                const blob = new Blob([content], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+        
+                // 무작위 파일 이름 생성
+                let fileName = generateRandomFileName();
+        
+                // Create an invisible link to trigger download
+                let link = document.createElement("a");
+                link.href = url;
+                link.download = fileName;  // 파일명을 무작위 이름으로 설정
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+        
+                // Revoke the object URL after the download
+                URL.revokeObjectURL(url);
+            }
+        }
+    </script>
 
 </body>
 </html>
