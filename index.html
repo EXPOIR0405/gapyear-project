@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -184,16 +184,6 @@
             <button onclick="alert('당신의 IP가 저장되었습니다.'); location.reload();" class="mt-4 bg-red-600 text-white px-4 py-2 rounded-lg">확인</button>
         </div>
     </div>
-
-        <!-- 종료 불가 모달 -->
-        <div id="cannotExitModal" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center z-50 hidden">
-            <div class="bg-white p-6 rounded-lg shadow-lg text-center text-gray-800">
-                <h2 class="text-2xl font-bold text-red-600 mb-4">경고</h2>
-                <p>종료할 수 없습니다!</p>
-                <p>당신의 행동이 기록되고 있습니다.</p>
-                <button onclick="closeCannotExitModal()" class="mt-4 bg-red-600 text-white px-4 py-2 rounded-lg">확인</button>
-            </div>
-        </div>
 
     <!-- 시스템 에러 모달 -->
     <div id="errorModal" class="fixed inset-0 bg-blue-900 text-white flex flex-col items-center justify-center z-50 hidden">
@@ -473,78 +463,57 @@
     <!-- 스크립트 섹션 -->
     <script>
         document.getElementById('glitchFooter').addEventListener('click', function() {
-            const originalText = document.getElementById('originalText');
-            const newMessage = document.getElementById('newMessage');
-    
-            // 글리치 효과
-            originalText.classList.add('glitch-effect');
-    
-            // Start fading out original text
-            let opacity = 1;
-            const fadeOutInterval = setInterval(() => {
-                opacity -= 0.1;
-                originalText.style.opacity = opacity;
-                if (opacity <= 0) {
-                    clearInterval(fadeOutInterval);
-                    originalText.classList.remove('glitch-effect');
-                    originalText.classList.add('hidden');
-                    newMessage.classList.remove('hidden');
-    
-                    // 새로운 메세지 나타내기
-                    let newOpacity = 0;
-                    const fadeInInterval = setInterval(() => {
-                        newOpacity += 0.1;
-                        newMessage.style.opacity = newOpacity;
-                        if (newOpacity >= 1) {
-                            clearInterval(fadeInInterval);
-                        }
-                    }, 50);
-                }
-            }, 50);
-        });
-    
+        const originalText = document.getElementById('originalText');
+        const newMessage = document.getElementById('newMessage');
+
+        // Apply glitch effect
+        originalText.classList.add('glitch-effect');
+
+        // Start fading out original text
+        let opacity = 1;
+        const fadeOutInterval = setInterval(() => {
+            opacity -= 0.1;
+            originalText.style.opacity = opacity;
+            if (opacity <= 0) {
+                clearInterval(fadeOutInterval);
+                originalText.classList.remove('glitch-effect');
+                originalText.classList.add('hidden');
+                newMessage.classList.remove('hidden');
+
+                // Fade in new message
+                let newOpacity = 0;
+                const fadeInInterval = setInterval(() => {
+                    newOpacity += 0.1;
+                    newMessage.style.opacity = newOpacity;
+                    if (newOpacity >= 1) {
+                        clearInterval(fadeInInterval);
+                    }
+                }, 50);
+            }
+        }, 50);
+    });
+
         // 광고 경고 모달
         function showAdWarning() {
             const adModal = document.getElementById('adWarningModal');
             adModal.classList.remove('hidden');
             setTimeout(() => {
-                alert("당신이 본 불법 광고가 딥페이크, 음란물 제작에 쓰이고 있습니다");
+                alert("불법 광고는 사용자에게 큰 위험을 초래할 수 있습니다. 주의하세요!");
             }, 2000);
         }
-    
+
         function closeAdWarning() {
             document.getElementById('adWarningModal').classList.add('hidden');
         }
-    
-        // failModal이 표시될 때 history 상태 추가
-        function showFailModal() {
-            document.getElementById('failModal').classList.remove('hidden');
-            history.pushState(null, '', '#failModal');
-        }
-    
-        // 뒤로가기 이벤트 처리
-        window.addEventListener('popstate', function(event) {
-            if (document.getElementById('failModal').classList.contains('hidden')) {
-                // failModal이 숨겨져 있다면 아무 작업도 하지 않음
-                return;
-            }
-            // failModal이 표시되어 있을 때 뒤로가기를 누르면 cannotExitModal 표시
-            event.preventDefault();
-            document.getElementById('cannotExitModal').classList.remove('hidden');
-        });
-    
-        function closeCannotExitModal() {
-            document.getElementById('cannotExitModal').classList.add('hidden');
-        }
-    
+
         // 로그인 및 회원가입 클릭 시 경고 메시지
         document.querySelectorAll('.login-button, .signup-button').forEach(button => {
             button.addEventListener('click', function(event) {
                 event.preventDefault();
-                showFailModal();
+                document.getElementById('failModal').classList.remove('hidden');
             });
         });
-    
+
         // 공지사항 토글 경고 메시지
         document.querySelectorAll('.toggle-warning').forEach(button => {
             button.addEventListener('click', function() {
@@ -552,16 +521,16 @@
                 warningMessage.classList.toggle('hidden');
             });
         });
-    
+
         // 시스템 에러 모달
         function showErrorModal() {
             document.getElementById('errorModal').classList.remove('hidden');
         }
-    
+
         function redirectToHome() {
             window.location.href = 'index.html';
         }
-    
+
         // 블랙아웃 모달
         function showBlackoutModal() {
             document.getElementById('blackoutModal').classList.remove('hidden');
@@ -570,11 +539,11 @@
                 alert("변호사 수임비가 꽤 비싼 건 아시죠?");
             }, 3000); // 3초 후 경고 모달 닫기
         }
-    
+
         function closeBlackoutModal() {
             document.getElementById('blackoutModal').classList.add('hidden');
         }
-    
+
         // 지진 효과
         function startShake() {
             const body = document.body;
@@ -584,14 +553,14 @@
                 alert("지진은 깜짝 이벤트였지만, 웹툰 작가들의 생활고는 상시 이벤트입니다. 오늘도 클릭 한 번, 작가 한 명 살려주세요!");
             }, 2000);
         }
-    
+
         // 특정 버튼 클릭 시 효과 실행
         document.querySelector('.recent-webtoon').addEventListener('click', showErrorModal);
         document.querySelector('.blackout-trigger').addEventListener('click', showBlackoutModal);
         document.querySelectorAll('.shake-trigger').forEach(button => {
             button.addEventListener('click', startShake);
         });
-    
+
         // 랜덤 경고 메시지
         function showRandomWarning() {
             const warnings = [
@@ -601,91 +570,94 @@
                 { title: "경고", text: "불법 웹툰은 작가의 열정을 빼앗아 갑니다. 당신의 선택은 어떤가요?", animation: "" },
                 { title: "🚨추적 중🚨", text: "이 웹툰을 불법으로 보는 당신, 뒤에서 경찰이 당신을 지켜보고 있을지도 몰라요. 불법은 항상 들킨다는 걸 잊지 마세요!", animation: "police-car" },
                 { title: "초능력 발견!", text: "당신의 손가락이 불법 웹툰 페이지를 열 때마다 어딘가에서 웹툰 작가의 펜이 멈춥니다. 마법이 아니라 현실입니다.", animation: "magic-wand" },
-                { title: "마치 영화처럼", text: "불법 웹툰 사이트에서의 하루는 마치 '모험의 시작' 같지만, 결말은 '죄와 벌'로 끝날 수 있습니다. 🎬", emoji: "🎬" },
+                { title: "마치 영화처럼", text: "불법 웹툰 사이트에서의 하루는 마치 ‘모험의 시작’ 같지만, 결말은 ‘죄와 벌’로 끝날 수 있습니다. 🎬", emoji: "🎬" },
                 { title: "😈 사탄도 울고 갈 당신 😈", text: "사탄도 울고 갈 만큼 무서운 선택을 하고 있네요. 지금이라도 돌아가 불법 웹툰 대신 정당한 방법으로 작가를 지원하세요!", animation: "devil-cry"},
                 { title: "범죄자의 길", text: "불법 웹툰을 클릭할 때마다 범죄자가 되어가는 당신, 진짜 히어로는 법을 지키는 사람입니다!"},
                 { title: "카르마의 법칙", text: "지금 당신이 불법 웹툰을 클릭한 그 순간, 카르마는 당신을 노트에 적고 있습니다. 공식 채널로 돌아가세요, 카르마는 지켜보고 있어요."},
                 { title: "당신의 꿈은 21세기 해적?", text: "해적이 되고 싶나요? 영화에서나 멋져 보일 뿐, 아쉽게도 당신은 조니뎁이 아니랍니다."}
             ];
-    
+
             const randomIndex = Math.floor(Math.random() * warnings.length);
             const selectedWarning = warnings[randomIndex];
-    
+
             document.getElementById('warningTitle').innerText = selectedWarning.title;
             document.getElementById('warningText').innerText = selectedWarning.text;
             document.getElementById('handAnimation').classList.add('hidden');
             document.getElementById('tearAnimation').classList.add('hidden');
-    
+
+
             if (selectedWarning.animation === "hand-stop") {
                 document.getElementById('handAnimation').classList.remove('hidden');
             } else if (selectedWarning.animation === "tear-drop") {
                 document.getElementById('tearAnimation').classList.remove('hidden');
             }
-    
+
             document.getElementById('warningModal').classList.remove('hidden');
         }
-    
+
+
         function closeWarningModal() {
             document.getElementById('warningModal').classList.add('hidden');
         }
-    
+
         // 웹툰 이미지 클릭 시 랜덤 경고 표시
         document.querySelectorAll('.trigger-warning').forEach(image => {
             image.addEventListener('click', showRandomWarning);
         });
+// 강화된 글리치 효과를 위한 새로운 스크립트
+function startEnhancedGlitchEffect() {
+    const glitchContainer = document.querySelector('.glitch-container');
+    const glitchContent = document.querySelector('.glitch-content');
+    const glitchText = document.querySelector('.glitch-text');
     
-        // 강화된 글리치 효과를 위한 새로운 스크립트
-        function startEnhancedGlitchEffect() {
-            const glitchContainer = document.querySelector('.glitch-container');
-            const glitchContent = document.querySelector('.glitch-content');
-            const glitchText = document.querySelector('.glitch-text');
-    
-            // 현재 보이는 영역만 캡처
-            const viewportWidth = window.innerWidth;
-            const viewportHeight = window.innerHeight;
-    
-            html2canvas(document.body, {
-                width: viewportWidth,
-                height: viewportHeight,
-                windowWidth: viewportWidth,
-                windowHeight: viewportHeight,
-                scrollX: window.scrollX,
-                scrollY: window.scrollY
-            }).then(canvas => {
-                glitchContent.innerHTML = '';
-                glitchContent.appendChild(canvas);
-    
-                glitchContainer.style.display = 'block';
-                glitchText.style.display = 'block';
-    
-                // 글리치 애니메이션 적용
-                glitchContent.style.animation = 'glitch-anim-1 0.3s infinite';
-                glitchText.style.animation = 'glitch-anim-2 0.3s infinite';
-    
-                // 랜덤 글리치 효과
-                let glitchInterval = setInterval(() => {
-                    glitchContent.style.left = `${Math.random() * 20 - 10}px`;
-                    glitchContent.style.top = `${Math.random() * 20 - 10}px`;
-                    glitchText.style.left = `calc(50% + ${Math.random() * 40 - 20}px)`;
-                    glitchText.style.top = `calc(50% + ${Math.random() * 40 - 20}px)`;
-                    glitchContent.style.filter = `hue-rotate(${Math.random() * 360}deg) saturate(${Math.random() * 10})`;
-                }, 50);
-    
-                // 효과 제거
-                setTimeout(() => {
-                    clearInterval(glitchInterval);
-                    glitchContainer.style.display = 'none';
-                    glitchText.style.display = 'none';
-                    glitchContent.style.animation = '';
-                    glitchText.style.animation = '';
-                }, 5000); // 5초로 연장
-            });
-        }
-    
-        // 장르 버튼에 강화된 글리치 효과 이벤트 리스너 추가
-        document.querySelectorAll('.bg-gray-700.text-white.py-1.px-2.rounded-lg').forEach(button => {
-            button.addEventListener('click', startEnhancedGlitchEffect);
-        });
+    // 현재 보이는 영역만 캡처
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+
+    html2canvas(document.body, {
+        width: viewportWidth,
+        height: viewportHeight,
+        windowWidth: viewportWidth,
+        windowHeight: viewportHeight,
+        scrollX: window.scrollX,
+        scrollY: window.scrollY
+    }).then(canvas => {
+        glitchContent.innerHTML = '';
+        glitchContent.appendChild(canvas);
+        
+        glitchContainer.style.display = 'block';
+        glitchText.style.display = 'block';
+
+        // 글리치 애니메이션 적용
+        glitchContent.style.animation = 'glitch-anim-1 0.3s infinite';
+        glitchText.style.animation = 'glitch-anim-2 0.3s infinite';
+
+        // 랜덤 글리치 효과
+        let glitchInterval = setInterval(() => {
+            glitchContent.style.left = `${Math.random() * 20 - 10}px`;
+            glitchContent.style.top = `${Math.random() * 20 - 10}px`;
+            glitchText.style.left = `calc(50% + ${Math.random() * 40 - 20}px)`;
+            glitchText.style.top = `calc(50% + ${Math.random() * 40 - 20}px)`;
+            glitchContent.style.filter = `hue-rotate(${Math.random() * 360}deg) saturate(${Math.random() * 10})`;
+        }, 50);
+
+        // 효과 제거
+        setTimeout(() => {
+            clearInterval(glitchInterval);
+            glitchContainer.style.display = 'none';
+            glitchText.style.display = 'none';
+            glitchContent.style.animation = '';
+            glitchText.style.animation = '';
+        }, 5000); // 5초로 연장
+    });
+}
+
+    // 장르 버튼에 강화된 글리치 효과 이벤트 리스너 추가
+    document.querySelectorAll('.bg-gray-700.text-white.py-1.px-2.rounded-lg').forEach(button => {
+        button.addEventListener('click', startEnhancedGlitchEffect);
+    });
     </script>
-    </body>
+    <!-- html2canvas 라이브러리 추가 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</body>
 </html>
