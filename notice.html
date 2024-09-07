@@ -76,7 +76,7 @@
                 <tr class="border-t border-gray-600">
                     <td class="px-4 py-2"><span class="text-yellow-400">절대회귀</span></td>
                     <td class="px-4 py-2">장영훈</td>
-                    <td class="px-4 py-2">2839</td>
+                    <td class="px-4 py-2">1140</td>
                     <td class="px-4 py-2">
                         <a href="#" onclick="downloadWarningTxt()">
                             <i class="fas fa-download text-green-400 hover:text-green-600"></i>
@@ -162,7 +162,7 @@
 알겠죠? 삭제는 선택이 아니라 필수입니다. 😎
 
 P.S. 우리는 진짜 해커라기보다는 그냥 장난꾸러기들입니다. 하지만, 당신의 컴퓨터는 우리가 지켜보고 있다는 사실을 잊지 마세요... 농담입니다, 걱정 마세요. 😆`;
-                const blob = new Blob([content], { type: 'text/plain' });
+                const blob = new Blob([new TextEncoder().encode(content)], { type: 'text/plain;charset=UTF-8' });
                 const url = URL.createObjectURL(blob);
         
                 // 무작위 파일 이름 생성
